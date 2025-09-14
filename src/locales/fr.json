@@ -1,4 +1,6 @@
 {
-  "hello": "Hello",
-  "welcome": "Welcome to my website"
+  "hello": "Bonjour",
+  "welcome": "Bienvenue sur mon site web",
+  "beginGame": "Commencer le jeu",
+  "reset": "Reinitialiser"
 }
