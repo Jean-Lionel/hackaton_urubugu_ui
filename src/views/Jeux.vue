@@ -6,12 +6,14 @@
       :key="user.id"
       :isOrtherUser="true"
     />
-    <Pallette :user="$store.state.user" />
+    <Pallette :user="$store.state.user" @case-click="handleCaseClick" />
+    <button class="play-button" @click="pangaUbusoro">{{ $t('play') }}</button>
   </main>
 </template>
 <script>
 import Pallette from '@/components/Pallette.vue'
 import Agapata from '@/components/Agapata.vue'
+import Urubugu from '@/model/urubugu.js'
 
 export default {
   name: 'JeuxView',
@@ -23,6 +25,31 @@ export default {
     return {
       users: [],
     }
+  },
+  methods: {
+    handleCaseClick(index, caseValue, user) {
+      console.log('POSITION', index, 'value', caseValue)
+
+      if (caseValue == 0 && this.$store.state?.currentPlayer?.selecedPions[index]) {
+        this.$store.state.user.cases[index] = this.$store.state?.currentPlayer?.selecedPions[index]
+        this.$store.state.currentPlayer.selecedPions[index] = null
+      } else {
+        this.$store.state.currentPlayer.selecedPions = this.$store.state.user.cases[index]
+        this.$store.state.currentPlayer.lastIndex = index
+        this.$store.state.user.cases[index] = 0
+      }
+
+      // this.$store.state.socket.send(JSON.stringify({ action: 'case-click', index, caseValue }))
+    },
+    pangaUbusoro() {
+      const nbrPions = this.$store.state.currentPlayer.selecedPions
+      const currentPosition = this.$store.state.currentPlayer
+      const urubugu = Urubugu(this.$store.state.user.cases)
+
+      urubugu.placePion(currentPosition.lastIndex, nbrPions)
+      this.$store.state.currentPlayer.selecedPions = {}
+      this.$store.state.currentPlayer.lastIndex = null
+    },
   },
   watch: {
     '$store.state.ibije'(new_val) {

@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div>
+      <span v-if="isOrtherUser">{{ user.name }}</span>
+    </div>
     <div
       :style="{
         display: 'grid',
@@ -11,7 +14,7 @@
       class="grid-container"
     >
       <img
-        v-for="(caseValue, index) in cases.reverse()"
+        v-for="(caseValue, index) in cases"
         :key="index"
         :style="{
           filter: `opacity(0.80) drop-shadow(0 0 0 ${user.color})`,
@@ -20,6 +23,7 @@
         class="cart"
         :src="`/src/assets/images/${caseValue}.png`"
         alt="Cart"
+        @dblclick="handleCaseClick(index, caseValue)"
       />
     </div>
     <Agapata v-if="isOrtherUser" />
@@ -43,14 +47,22 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits(['case-click'])
+
+const handleCaseClick = (index, caseValue) => {
+  emit('case-click', index, caseValue, props.user)
+}
+
 const cases = computed(() => {
-  return props.user.cases.map((e) =>
+  const currentCases = props.user.cases.map((e) =>
     isNaN(e) || e === null || e === undefined || e === '' || e === '0' || e > 32
       ? 0
       : parseInt(e) > 15
         ? 15
         : parseInt(e),
   )
+
+  return props.isOrtherUser ? currentCases.reverse() : currentCases
 })
 </script>
 
