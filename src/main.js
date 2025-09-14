@@ -4,8 +4,27 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
+import { createI18n } from 'vue-i18n'
+
+// Import des traductions
+import fr from './locales/fr.json'
+import en from './locales/en.json'
+import run from './locales/run.json'
+
+// Création de l’instance i18n
+const i18n = createI18n({
+  locale: 'run', // langue par défaut
+  fallbackLocale: 'fr', // langue de secours
+  messages: {
+    fr,
+    en,
+    run,
+  },
+})
+
 const app = createApp(App)
 
 app.use(router)
+app.use(i18n)
 
 app.mount('#app')

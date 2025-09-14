@@ -19,16 +19,23 @@
       alt="Cart"
     />
   </div>
+  <Agapata v-if="showAgapata" />
 </template>
 
 <script setup>
 import { computed } from 'vue'
 import { ref } from 'vue'
+import Agapata from './Agapata.vue'
 
 const props = defineProps({
   user: {
     type: Object,
     required: true,
+  },
+  showAgapata: {
+    type: Boolean,
+    required: false,
+    default: false,
   },
 })
 
