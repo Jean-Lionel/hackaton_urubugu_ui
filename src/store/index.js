@@ -4,7 +4,11 @@ import { createStore } from 'vuex'
 const store = createStore({
   state() {
     return {
-      count: 0,
+      user: null,
+      socket: null,
+      wsUrl: `ws://192.168.1.186:8765/`,
+      abandi: [],
+      ibije: null
     }
   },
   mutations: {
