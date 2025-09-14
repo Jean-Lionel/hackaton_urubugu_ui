@@ -66,6 +66,7 @@ import { ref, computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import LanguageComponent from '@/components/LanguageComponent.vue'
 import Pallette from '../components/Pallette.vue'
+import { useStore } from 'vuex'
 
 const { t } = useI18n()
 
@@ -75,6 +76,7 @@ const cases = ref([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 const caseErrors = ref({})
 const globalError = ref('')
 const MAX_PIONS = 32
+const store = useStore()
 
 // Computed properties
 const totalPions = computed(() => {
@@ -178,7 +180,7 @@ function startGame() {
     cases: cases.value,
     totalPions: totalPions.value,
   })
-
+  localStorage.setItem('INITIAL_POSITIONS', JSON.stringify(cases.value))
   // Logique pour démarrer le jeu
 }
 
