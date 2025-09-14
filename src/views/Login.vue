@@ -77,7 +77,6 @@ const cases = ref([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 const caseErrors = ref({})
 const globalError = ref('')
 const MAX_PIONS = 32
-const store = useStore()
 
 // Computed properties
 const totalPions = computed(() => {
