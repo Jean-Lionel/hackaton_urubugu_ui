@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from './router'
 
 import { createI18n } from 'vue-i18n'
+import store from './store'
 
 // Import des traductions
 import fr from './locales/fr.json'
@@ -26,5 +27,5 @@ const app = createApp(App)
 
 app.use(router)
 app.use(i18n)
-
+app.use(store)
 app.mount('#app')
