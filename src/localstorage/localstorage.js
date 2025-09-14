@@ -1,0 +1,3 @@
+export default LOCAL_STORAGE = {
+  INITIAL_POSITIONS: 'INITIAL_POSITIONS',
+}
