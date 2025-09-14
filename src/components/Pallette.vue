@@ -11,7 +11,7 @@
       class="grid-container"
     >
       <img
-        v-for="(caseValue, index) in cases"
+        v-for="(caseValue, index) in cases.reverse()"
         :key="index"
         :style="{
           filter: `opacity(0.80) drop-shadow(0 0 0 ${user.color})`,
@@ -22,7 +22,7 @@
         alt="Cart"
       />
     </div>
-    <Agapata v-if="showAgapata" />
+    <Agapata v-if="isOrtherUser" />
   </div>
 </template>
 
@@ -36,7 +36,7 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  showAgapata: {
+  isOrtherUser: {
     type: Boolean,
     required: false,
     default: false,

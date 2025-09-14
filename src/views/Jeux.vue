@@ -1,6 +1,11 @@
 <template>
   <main>
-    <Pallette :user="user" v-for="user in $store.state.abandi" :key="user.id" :showAgapata="user.id === 1" />
+    <Pallette
+      :user="user"
+      v-for="user in $store.state.abandi"
+      :key="user.id"
+      :isOrtherUser="true"
+    />
     <Pallette :user="$store.state.user" />
   </main>
 </template>
@@ -27,13 +32,17 @@ export default {
           JSON.stringify({
             action: 'abandi',
             abandi: [...this.$store.state.abandi, this.$store.state.user],
-          })
+          }),
         )
-        this.$store.state.abandi.push({ name: ibije.name, cases: ibije.cases, id: ibije.id, color: ibije.color })
+        this.$store.state.abandi.push({
+          name: ibije.name,
+          cases: ibije.cases,
+          id: ibije.id,
+          color: ibije.color,
+        })
       }
       if (ibije.action === 'abandi') {
-        if(this.$store.state.abandi.length == 0)
-          this.$store.state.abandi = ibije.abandi
+        if (this.$store.state.abandi.length == 0) this.$store.state.abandi = ibije.abandi
       }
     },
   },
