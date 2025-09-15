@@ -14,6 +14,7 @@
 import Pallette from '@/components/Pallette.vue'
 import Agapata from '@/components/Agapata.vue'
 import Urubugu from '@/model/urubugu.js'
+import { getIndexPosition } from '@/localstorage/localstorage'
 
 export default {
   name: 'JeuxView',
@@ -27,27 +28,27 @@ export default {
     }
   },
   methods: {
-    handleCaseClick(index, caseValue, user) {
-      console.log('POSITION', index, 'value', caseValue)
-
-      if (caseValue == 0 && this.$store.state?.currentPlayer?.selecedPions[index]) {
-        this.$store.state.user.cases[index] = this.$store.state?.currentPlayer?.selecedPions[index]
-        this.$store.state.currentPlayer.selecedPions[index] = null
-      } else {
-        this.$store.state.currentPlayer.selecedPions = this.$store.state.user.cases[index]
-        this.$store.state.currentPlayer.lastIndex = index
-        this.$store.state.user.cases[index] = 0
-      }
-
+    handleCaseClick(position, caseValue, user) {
       // this.$store.state.socket.send(JSON.stringify({ action: 'case-click', index, caseValue }))
+      // Coservation de la position choisir
+      this.$store.state.user.currentPosition = position
+      this.$store.state.user.currentValue = caseValue
+      // MOdifier le nombre de pions
+      const index = getIndexPosition(position)
+      this.$store.state.user.cases[index] = 0
     },
+    subizaUbusoro() {},
     pangaUbusoro() {
-      const nbrPions = this.$store.state.currentPlayer.selecedPions
-      const currentPosition = this.$store.state.currentPlayer
-      const urubugu = Urubugu(this.$store.state.user.cases)
-      urubugu.placePion(currentPosition.lastIndex, nbrPions)
-      this.$store.state.currentPlayer.selecedPions = {}
-      this.$store.state.currentPlayer.lastIndex = null
+      const cases = this.$store.state.user.cases
+      const urubugu = Urubugu(cases)
+      urubugu.positionnerPion(
+        this.$store.state.user.currentPosition,
+        this.$store.state.user.currentValue,
+      )
+
+      this.$store.state.user.cases = urubugu.casesValues()
+      this.$store.state.user.currentPosition = null
+      this.$store.state.user.currentValue = null
     },
   },
   watch: {

@@ -13,7 +13,7 @@
       }"
       class="grid-container"
     >
-      <div v-for="(caseValue, index) in cases" :key="index">
+      <div v-for="(caseValue, caseI) in cases" :key="caseI">
         {{ caseValue.position }}
         <img
           :style="{
@@ -54,8 +54,8 @@ const getImageId = (value) => {
 
 const emit = defineEmits(['case-click'])
 
-const handleCaseClick = (index, caseValue) => {
-  emit('case-click', index, caseValue, props.user)
+const handleCaseClick = (position, caseValue) => {
+  emit('case-click', position, caseValue, props.user)
 }
 
 const positions = ref([15, 14, 13, 12, 11, 10, 9, 8, 0, 1, 2, 3, 4, 5, 6, 7])

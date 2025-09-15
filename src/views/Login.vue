@@ -71,9 +71,9 @@ import { useStore } from 'vuex'
 const { t } = useI18n()
 const store = useStore()
 
-const name = ref('')
+const name = ref('JEAN LEO')
 const positions = ref([15, 14, 13, 12, 11, 10, 9, 8, 0, 1, 2, 3, 4, 5, 6, 7])
-const cases = ref([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+const cases = ref([0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0])
 const caseErrors = ref({})
 const globalError = ref('')
 const MAX_PIONS = 32
