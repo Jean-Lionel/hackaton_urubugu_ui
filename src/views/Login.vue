@@ -13,12 +13,13 @@
           class="pions-restant"
           :class="{ 'pions-warning': PION_RESTANT <= 5, 'pions-error': PION_RESTANT <= 0 }"
         >
-          {{ $t('pionsRestant', { count: PION_RESTANT }) || `Pions restants: ${PION_RESTANT}` }}
+          {{ $t('pionsRestant') || `Pions restants: ${PION_RESTANT}` }}
+          {{ PION_RESTANT }}
         </span>
-        <span class="pions-total">{{
-          $t('totalPions', { total: totalPions, max: MAX_PIONS }) ||
-          `Total: ${totalPions}/${MAX_PIONS}`
-        }}</span>
+        <span class="pions-total"
+          >{{ $t('totalPions') || `Total: ${totalPions}/${MAX_PIONS}` }}
+          {{ `Total: ${totalPions}/${MAX_PIONS}` }}
+        </span>
       </div>
 
       <Pallette :user="user" :showAgapata="false" />
@@ -71,9 +72,9 @@ import { useStore } from 'vuex'
 const { t } = useI18n()
 const store = useStore()
 
-const name = ref('JEAN LEO')
+const name = ref('')
 const positions = ref([15, 14, 13, 12, 11, 10, 9, 8, 0, 1, 2, 3, 4, 5, 6, 7])
-const cases = ref([0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0])
+const cases = ref([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 const caseErrors = ref({})
 const globalError = ref('')
 const MAX_PIONS = 32

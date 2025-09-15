@@ -3,5 +3,7 @@
   "welcome": "Bienvenue sur mon site web",
   "beginGame": "Commencer le jeu",
   "reset": "Reinitialiser",
-  "play": "Jouer"
+  "play": "Jouer",
+  "pionsRestant${count}": "Pions restants",
+  "totalPions": "Total pions"
 }
