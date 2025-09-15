@@ -1,4 +1,11 @@
-
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e9ecef;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: url('/src/assets/images/ukuboko.png'), auto;
+}
 .pions-info {
   display: flex;
   justify-content: space-between;

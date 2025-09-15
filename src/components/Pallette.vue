@@ -8,14 +8,13 @@
         width: '100%',
         maxWidth: '100%',
       }"
-      class="grid-container"
+      class="grid-container urubugu"
     >
       <img
         v-for="(caseValue, index) in cases"
         :key="index"
         :style="{
           filter: `opacity(0.80) drop-shadow(0 0 0 ${user.color})`,
-          cursor: 'pointer',
         }"
         class="cart"
         :src="`/src/assets/images/${caseValue}.png`"
@@ -76,7 +75,6 @@ const cases = computed(() => {
 .cart:hover {
   filter: opacity(1) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
 }
-
 /* Responsive design pour différentes tailles d'écran */
 @media (max-width: 768px) {
   .grid-container {
