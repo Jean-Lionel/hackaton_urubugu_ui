@@ -26,7 +26,6 @@
 
       <div class="cases">
         <div v-for="(caseValue, index) in positions" :key="index" class="case-container">
-          <label class="case-label">{{ caseValue }}</label>
           <input
             type="number"
             min="0"
