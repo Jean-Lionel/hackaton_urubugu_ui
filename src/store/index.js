@@ -8,7 +8,11 @@ const store = createStore({
       socket: null,
       wsUrl: `ws://192.168.1.186:8765/`,
       abandi: [],
-      ibije: null
+      ibije: null,
+      currentPlayer: {
+        selecedPions: {},
+        lastIndex: null,
+      },
     }
   },
   mutations: {

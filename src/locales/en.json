@@ -2,5 +2,8 @@
   "hello": "Hello",
   "welcome": "Welcome to my website",
   "beginGame": "Start Game",
-  "reset": "Reset"
+  "reset": "Reset",
+  "play": "Play",
+  "pionsRestant": "Pions restants",
+  "totalPions": "Total pions"
 }
