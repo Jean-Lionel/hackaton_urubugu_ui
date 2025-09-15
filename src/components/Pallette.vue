@@ -8,7 +8,7 @@
         width: '100%',
         maxWidth: '100%',
       }"
-      class="grid-container"
+      class="grid-container urubugu"
     >
       <div v-for="(caseValue, caseI) in cases" :key="caseI">
         <!-- {{ caseValue.position }} -->
@@ -88,7 +88,6 @@ const cases = computed(() => {
 .cart:hover {
   filter: opacity(1) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
 }
-
 /* Responsive design pour différentes tailles d'écran */
 @media (max-width: 768px) {
   .grid-container {
