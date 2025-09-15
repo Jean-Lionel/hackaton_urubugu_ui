@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div>
-      <span v-if="isOrtherUser">{{ user.name }}</span>
-    </div>
     <div
       :style="{
         display: 'grid',
@@ -14,7 +11,7 @@
       class="grid-container"
     >
       <div v-for="(caseValue, caseI) in cases" :key="caseI">
-        {{ caseValue.position }}
+        <!-- {{ caseValue.position }} -->
         <img
           :style="{
             filter: `opacity(0.80) drop-shadow(0 0 0 ${user.color})`,
