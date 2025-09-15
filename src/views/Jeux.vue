@@ -45,10 +45,18 @@ export default {
         this.$store.state.user.currentPosition,
         this.$store.state.user.currentValue,
       )
-
       this.$store.state.user.cases = urubugu.casesValues()
       this.$store.state.user.currentPosition = null
       this.$store.state.user.currentValue = null
+      this.$store.state.socket.send(
+        JSON.stringify({
+          action: 'placement_pions',
+          user: {
+            ...this.$store.state.user,
+            cases: this.$store.state.user.cases,
+          },
+        }),
+      )
     },
   },
   watch: {
@@ -70,6 +78,10 @@ export default {
       }
       if (ibije.action === 'abandi') {
         if (this.$store.state.abandi.length == 0) this.$store.state.abandi = ibije.abandi
+      }
+      if (ibije.action === 'placement_pions') {
+        console.log('placement_pions', ibije)
+        this.$store.state.abandi.find((e) => e.id === ibije.user.id).cases = ibije.user.cases
       }
     },
   },

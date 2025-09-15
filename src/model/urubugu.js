@@ -12,7 +12,15 @@ const Urubugu = (cases) => {
       p = nextPosition(p)
     }
     const lastPosition = getLastPosition(position, nbrPion)
-    console.log('---------lastPosition--------', lastPosition)
+    const currentLastValues = getCaseValue(lastPosition)
+
+    if (currentLastValues > 1) {
+      // chef if no one win
+      removePion(lastPosition, currentLastValues)
+      positionnerPion(lastPosition, currentLastValues)
+    } else {
+      return
+    }
   }
 
   const getLastPosition = (position, nbrPion) => {
@@ -31,6 +39,7 @@ const Urubugu = (cases) => {
 
   const getCaseValue = (position) => {
     const indexI = casesPosition.findIndex((e) => e.position === position)
+    if (indexI === -1) return 0
     return casesPosition[indexI].value
   }
 
