@@ -11,11 +11,16 @@ const Urubugu = (cases) => {
       addPion(p)
       p = nextPosition(p)
     }
+    const lastPosition = getLastPosition(position, nbrPion)
+    console.log('---------lastPosition--------', lastPosition)
+  }
+
+  const getLastPosition = (position, nbrPion) => {
+    return nextPosition(position + nbrPion - 1)
   }
 
   const addPion = (position, nbrPion = 1) => {
     const indexI = casesPosition.findIndex((e) => e.position === position)
-
     casesPosition[indexI].value += nbrPion
   }
 
