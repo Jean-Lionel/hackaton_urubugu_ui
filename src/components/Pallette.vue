@@ -13,18 +13,19 @@
       }"
       class="grid-container"
     >
-      <img
-        v-for="(caseValue, index) in cases"
-        :key="index"
-        :style="{
-          filter: `opacity(0.80) drop-shadow(0 0 0 ${user.color})`,
-          cursor: 'pointer',
-        }"
-        class="cart"
-        :src="`/src/assets/images/${caseValue}.png`"
-        alt="Cart"
-        @dblclick="handleCaseClick(index, caseValue)"
-      />
+      <div v-for="(caseValue, index) in cases" :key="index">
+        {{ caseValue.position }}
+        <img
+          :style="{
+            filter: `opacity(0.80) drop-shadow(0 0 0 ${user.color})`,
+            cursor: 'pointer',
+          }"
+          class="cart"
+          :src="`/src/assets/images/${getImageId(caseValue.value)}.png`"
+          alt="Cart"
+          @dblclick="handleCaseClick(caseValue.position, caseValue.value)"
+        />
+      </div>
     </div>
     <Agapata v-if="isOrtherUser" />
   </div>
@@ -47,20 +48,22 @@ const props = defineProps({
   },
 })
 
+const getImageId = (value) => {
+  return value < 15 ? value : 15
+}
+
 const emit = defineEmits(['case-click'])
 
 const handleCaseClick = (index, caseValue) => {
   emit('case-click', index, caseValue, props.user)
 }
 
+const positions = ref([15, 14, 13, 12, 11, 10, 9, 8, 0, 1, 2, 3, 4, 5, 6, 7])
+
 const cases = computed(() => {
-  const currentCases = props.user.cases.map((e) =>
-    isNaN(e) || e === null || e === undefined || e === '' || e === '0' || e > 32
-      ? 0
-      : parseInt(e) > 15
-        ? 15
-        : parseInt(e),
-  )
+  const currentCases = props.user.cases.map((e, i) => {
+    return { position: positions.value[i], value: e }
+  })
 
   return props.isOrtherUser ? currentCases.reverse() : currentCases
 })

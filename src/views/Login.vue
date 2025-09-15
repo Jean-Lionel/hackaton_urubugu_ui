@@ -177,36 +177,36 @@ function startGame() {
   let amacase = cases.value.map((c) => (isNaN(c) ? 0 : parseInt(c)))
   let color = '#FF0000' // Couleur par défaut pour le joueur principal
 
-  store.state.socket = new WebSocket(store.state.wsUrl);
-  store.state.socket.onopen = function(e) {
-    console.log("[open] Connection established");
-    store.state.socket.send(JSON.stringify({action: "login", name: nom, cases: amacase}));
-  };
-  store.state.socket.onmessage = function(event) {
+  store.state.socket = new WebSocket(store.state.wsUrl)
+  store.state.socket.onopen = function (e) {
+    console.log('[open] Connection established')
+    store.state.socket.send(JSON.stringify({ action: 'login', name: nom, cases: amacase }))
+  }
+  store.state.socket.onmessage = function (event) {
     console.log(event)
-    let ibije = JSON.parse(event.data);
-    if (ibije.action === "login") {
-      if(ibije.name === nom){
-        store.state.user = { name: nom, cases: amacase, color: color };
+    let ibije = JSON.parse(event.data)
+    if (ibije.action === 'login') {
+      if (ibije.name === nom) {
+        store.state.user = { name: nom, cases: amacase, color: color }
       } else {
-        store.state.ibije = event.data;
+        store.state.ibije = event.data
       }
     } else {
-      store.state.ibije = event.data;
+      store.state.ibije = event.data
     }
-    return;
-  };
-  store.state.socket.onclose = function(event) {
-      if (event.wasClean) {
-          console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
-      } else {
-          console.log('[close] Connection died');
-          console.log(`[close] ${JSON.stringify(event)}`);
-      }
-  };
-  store.state.socket.onerror = function(error) {
-      console.log(`[error] ${JSON.stringify(error)}`);
-  };
+    return
+  }
+  store.state.socket.onclose = function (event) {
+    if (event.wasClean) {
+      console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`)
+    } else {
+      console.log('[close] Connection died')
+      console.log(`[close] ${JSON.stringify(event)}`)
+    }
+  }
+  store.state.socket.onerror = function (error) {
+    console.log(`[error] ${JSON.stringify(error)}`)
+  }
 }
 
 function reset() {
@@ -252,5 +252,4 @@ watch(
 validateAllCases()
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

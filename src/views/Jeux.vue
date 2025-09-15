@@ -45,7 +45,6 @@ export default {
       const nbrPions = this.$store.state.currentPlayer.selecedPions
       const currentPosition = this.$store.state.currentPlayer
       const urubugu = Urubugu(this.$store.state.user.cases)
-
       urubugu.placePion(currentPosition.lastIndex, nbrPions)
       this.$store.state.currentPlayer.selecedPions = {}
       this.$store.state.currentPlayer.lastIndex = null
