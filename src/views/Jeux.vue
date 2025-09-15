@@ -87,3 +87,15 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.play-button {
+  padding: 10px 20px;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #c52626;
+}
+</style>
