@@ -1,20 +1,28 @@
 <template>
-  <main>
-    <Pallette
-      :user="user"
-      v-for="user in $store.state.abandi"
-      :key="user.id"
-      :isOrtherUser="true"
-    />
-    <Pallette :user="$store.state.user" @case-click="handleCaseClick" />
-    <button class="play-button" @click="pangaUbusoro">{{ $t('play') }}</button>
-  </main>
+  <div class="jeux">
+    <main>
+      <div>
+        <h4>{{ $t('hakaton') }}</h4>
+      </div>
+      <Pallette
+        :user="user"
+        v-for="user in $store.state.abandi"
+        :key="user.id"
+        :isOrtherUser="true"
+      />
+      <Pallette :user="$store.state.user" @case-click="handleCaseClick" />
+      <button class="play-button" @click="pangaUbusoro">
+        {{ $t('play') }}
+      </button>
+    </main>
+  </div>
 </template>
 <script>
 import Pallette from '@/components/Pallette.vue'
 import Agapata from '@/components/Agapata.vue'
 import Urubugu from '@/model/urubugu.js'
 import { getIndexPosition } from '@/localstorage/localstorage'
+import bip from '@/assets/audio/bip.mp3'
 
 export default {
   name: 'JeuxView',
@@ -25,6 +33,7 @@ export default {
   data() {
     return {
       users: [],
+      bip: bip,
     }
   },
   methods: {
@@ -82,6 +91,12 @@ export default {
       if (ibije.action === 'placement_pions') {
         console.log('placement_pions', ibije)
         this.$store.state.abandi.find((e) => e.id === ibije.user.id).cases = ibije.user.cases
+        this.$store.state.socket.send(JSON.stringify({ action: 'bip' }))
+      }
+      if (ibije.action === 'bip') {
+        const audio = new Audio(this.bip)
+        audio.play()
+        //  this.finishToPlay = !this.finishToPlay
       }
     },
   },
@@ -90,12 +105,43 @@ export default {
 
 <style scoped>
 .play-button {
+  margin-top: 20px;
   padding: 10px 20px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  background: linear-gradient(135deg, #4cafef, #007bff); /* joli dégradé */
+  color: #fff; /* texte blanc */
+  transition: all 0.3s ease; /* animation douce */
+}
+
+.play-button:hover {
+  background: linear-gradient(13deg, #007bff, #0056b3); /* survol */
+}
+
+.play-button:active {
+  transform: scale(0.95); /* effet clic */
 }
 main {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  background-color: #c52626;
+  align-content: center;
+  width: 1025px;
+  height: 100vh;
+  justify-content: center;
+}
+.jeux {
+  width: 1025px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  main {
+    width: 60%;
+  }
 }
 </style>
